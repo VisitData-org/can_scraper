@@ -15,3 +15,7 @@ for SCENARIO in $SCENARIOS_TO_RETRIEVE; do
     done
 done
 
+node ./state_csvs.js > data/$TODAY/CAN.csv
+
+aws s3 cp data/$TODAY/CAN.csv s3://jhumodelaggregates/latest/CAN.csv
+aws s3 cp data/$TODAY/CAN.csv s3://jhumodelaggregates/$TODAY/CAN.csv
