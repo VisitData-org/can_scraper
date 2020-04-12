@@ -1,4 +1,4 @@
 
-* pull 3 x ~52 JSON files
-* make 4 CSVs for CA x {4scenarios}
-* make 200 CSVs for allCounties+CA x {50dates} x {4scenarios}
+x pull 3 x ~52 JSON files
+x make 3 CSVs for CA x {3scenarios}
+* make 200 CSVs for allCounties+CA x {50dates} x {3scenarios}
