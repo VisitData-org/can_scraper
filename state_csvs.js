@@ -18,7 +18,7 @@ const COLUMNS = {
 const COLS_IN_ORDER = [
   'date',
   'scenarioNum',
-  'geo',
+  'fips',
   'infected',
   'hospitalizations',
   'beds',
@@ -27,19 +27,19 @@ const COLS_IN_ORDER = [
   'totalPopulation',
 ];
 
-function jsonToCSV(jsonFile, scenarioNum, geo) {
+function jsonToCSV(jsonFile, scenarioNum, fips) {
   var csv = "";
   const thejson = fs.readFileSync(jsonFile)
   const fileJSON = JSON.parse(thejson);
   _.each(fileJSON, function(elem) {
     elem.scenarioNum = scenarioNum;
-    elem.geo = geo;
+    elem.fips = fips;
     var rowData = _.map(COLS_IN_ORDER, function(colName) {
       if (colName == 'scenarioNum') {
         return scenarioNum;
       }
-      if (colName == 'geo') {
-        return geo;
+      if (colName == 'fips') {
+        return fips;
       }
       return elem[COLUMNS[colName]];
     });
@@ -55,7 +55,7 @@ bigCSV = "";
 bigCSV += COLS_IN_ORDER.join(', ') + '\n';
 
 _.each(scenarioNums, function(scenarioNum) {
-  bigCSV += jsonToCSV(`data/20200412/CA.${scenarioNum}.json`, scenarioNum, 'CA');
+  bigCSV += jsonToCSV(`data/20200412/CA.${scenarioNum}.json`, scenarioNum, '06000');
   _.each(countyFIPS, function(fipsCode) {
     bigCSV += jsonToCSV(`data/20200412/CA.${fipsCode}.${scenarioNum}.json`, scenarioNum, fipsCode);
   });    
